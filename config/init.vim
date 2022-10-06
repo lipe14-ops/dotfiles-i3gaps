@@ -1,5 +1,6 @@
 call plug#begin()
 "plugins""""""
+Plug 'dinhhuy258/git.nvim'
 Plug 'startup-nvim/startup.nvim',
 Plug 'folke/zen-mode.nvim',
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -18,6 +19,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'xuyuanp/nerdtree-git-plugin'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 call plug#end()
 
 
@@ -25,7 +27,7 @@ call plug#end()
 
 syntax on
 
-set nu
+set rnu nu
 set noro
 set tabstop=4
 set scrolloff=10
@@ -125,6 +127,7 @@ lua << EOF
 require("nvim-autopairs").setup {}
 require("zen-mode").setup{}
 require("startup").setup()
+require("git").setup()
 require'toggleterm'.setup{
     direction = "float"
 }
