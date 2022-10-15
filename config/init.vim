@@ -1,11 +1,9 @@
 call plug#begin()
 "plugins""""""
-Plug 'dinhhuy258/git.nvim'
 Plug 'startup-nvim/startup.nvim',
 Plug 'folke/zen-mode.nvim',
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
-Plug 'lewis6991/gitsigns.nvim'
 Plug 'andweeb/presence.nvim'
 Plug 'tek256/simple-dark'
 Plug 'windwp/nvim-autopairs'
@@ -20,6 +18,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'xuyuanp/nerdtree-git-plugin'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'lewis6991/gitsigns.nvim'
 call plug#end()
 
 
@@ -60,16 +59,24 @@ filetype indent on
 colorscheme simple-dark-transparent
 highlight LineNr term=bold cterm=NONE ctermfg=NONE ctermbg=NONE gui=NONE guifg=NONE guibg=NONE
 highlight ALEWarning ctermbg=DarkMagenta
-nmap <C-a> :NERDTreeToggle<CR>
+nmap <C-a> :NERDTreeToggle <CR>
 
+let g:airline_symbols = {}
 let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_theme='base16'
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
 
-"shortcuts fot split navigation"""""
-map <C-h> <C-w>h
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
+let g:airline_symbols.whitespace = 'Ξ'
+
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
@@ -77,6 +84,7 @@ map <C-l> <C-w>l
 "ALE""""""
 let g:ale_fix_on_save = 1
 let ale_completition_autoimprot = 1
+
 
 let g:ale_linters = {
 \}
@@ -127,12 +135,12 @@ lua << EOF
 require("nvim-autopairs").setup {}
 require("zen-mode").setup{}
 require("startup").setup()
-require("git").setup()
+require("gitsigns").setup()
 require'toggleterm'.setup{
     direction = "float"
 }
-require('gitsigns').setup()
 EOF
+
 
 " set
 autocmd TermEnter term://*toggleterm#*
